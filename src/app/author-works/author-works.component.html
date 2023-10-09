@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2>Author's Works</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Book Name</th>
+        <th>Book Date Created</th>
+        <th>Last Modified</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let work of displayedWorks">
+        <td>{{ work.title }}</td>
+        <td>{{ work.created.value | date: 'dd/MM/yyyy'}}</td>
+        <td>{{ work.last_modified.value | date: 'dd/MM/yyyy'}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <div class="pagination d-flex justify-content-center align-items-center">
+    <button class="btn btn-primary" (click)="previousPageWorks()" [disabled]="currentPageWorks === 1">Previous</button>
+    <span class="page-number mx-3">
+      <span class="border border-dark px-2 py-1">{{ currentPageWorks }}</span>
+    </span>
+    <button class="btn btn-primary" (click)="nextPageWorks()"
+      [disabled]="currentPageWorks * worksPerPage >= works.length">Next</button>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="input-group">
+        <input type="text" [(ngModel)]="query" class="form-control" placeholder="Enter author name"
+          (keyup.enter)="searchAuthors()" />
+        <div class="input-group-append">
+          <button (click)="searchAuthors()" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Author Name</th>
+        <th>View Details</th>
+        <th>View Works</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let author of displayedAuthors">
+        <td>{{ author.name }}</td>
+        <td><a [routerLink]="['/authors', author.key]">View Details</a></td>
+        <td><a [routerLink]="['/authors', author.key, 'works']">View Works</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination d-flex justify-content-center align-items-center" *ngIf="authors.length > 0 ">
+    <button class="btn btn-primary" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <div class="page-number mx-3">
+      <span class="border border-dark px-2 py-1">{{ currentPage }}</span>
+    </div>
+    <button class="btn btn-primary" (click)="nextPage()"
+      [disabled]="currentPage * authorsPerPage >= authors.length">Next</button>
+  </div>
+
+
+
+</div>
